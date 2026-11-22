@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6d1028">
+
+  <meta
+    name="description"
+    content="Nivel inicial, primario y secundario con orientación en informática: conocé la propuesta del Colegio Santa Isabel de Hungría, en Salta."
+  >
+
+  <title>Niveles educativos | Colegio Santa Isabel de Hungría</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="configuracion.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <style>
+    /* ---------- Accesibilidad ---------- */
+    .salto {
+      position: absolute;
+      top: -100px;
+      left: 15px;
+      z-index: 1000;
+      padding: 12px 18px;
+      background: #6d1028;
+      color: #ffffff;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .salto:focus {
+      top: 15px;
+    }
+
+    .niveles-contenedor a:focus-visible {
+      outline: 3px solid #6d1028;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* ---------- Estructura ---------- */
+    .niveles-contenedor {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Cada nivel es un bloque a todo el ancho: texto + etapa */
+    .nivel {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 44px;
+      align-items: start;
+      margin: 0 0 28px;
+      padding: 36px;
+      background: #ffffff;
+      border: 1px solid #ead9df;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(109, 16, 40, 0.08);
+    }
+
+    .nivel h2 {
+      margin: 0 0 16px;
+      color: #6d1028;
+      font-size: 1.8rem;
+      line-height: 1.2;
+    }
+
+    .nivel p {
+      max-width: 60ch;
+      margin: 0 0 16px;
+      color: #493840;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .nivel p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ---------- Qué trabajamos en la etapa ---------- */
+    .nivel-etapa {
+      padding: 22px 26px;
+      background: #fffafb;
+      border-left: 4px solid #6d1028;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .nivel-etapa h3 {
+      margin: 0 0 8px;
+      color: #6d1028;
+      font-size: 1.1rem;
+    }
+
+    .nivel-etapa ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nivel-etapa li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f0e4e8;
+      color: #493840;
+      line-height: 1.5;
+    }
+
+    .nivel-etapa li:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    /* ---------- Acceso rápido a cada nivel ---------- */
+    .niveles-indice {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 28px;
+    }
+
+    .niveles-indice p {
+      margin: 0 6px 0 0;
+      color: #75616a;
+      font-size: 15px;
+    }
+
+    .niveles-indice a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 8px 18px;
+      background: #ffffff;
+      border: 1.5px solid #d9bfc8;
+      border-radius: 999px;
+      color: #6d1028;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .niveles-indice a:hover {
+      background: #f0dce2;
+    }
+
+    .nivel {
+      scroll-margin-top: 90px;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: smooth;
+      }
+    }
+
+    /* ---------- Orientación en informática ---------- */
+    .nivel-orientacion {
+      margin: 0 0 28px;
+      padding: 34px 36px;
+      background: #6d1028;
+      color: #ffffff;
+      border-radius: 18px;
+    }
+
+    .nivel-orientacion h2 {
+      margin: 0 0 12px;
+      color: #ffffff;
+      font-size: 1.6rem;
+      line-height: 1.25;
+    }
+
+    .nivel-orientacion p {
+      max-width: 62ch;
+      margin: 0;
+      color: #f6e6ea;
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    @media (max-width: 720px) {
+      .nivel-orientacion {
+        padding: 24px 22px;
+      }
+
+      .nivel-orientacion h2 {
+        font-size: 1.4rem;
+      }
+    }
+
+    /* ---------- Consultas ---------- */
+    .niveles-consultas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px 40px;
+      padding: 24px 28px;
+      background: #fffafb;
+      border-left: 4px solid #6d1028;
+      border-radius: 8px;
+    }
+
+    .niveles-consultas h2 {
+      margin: 0 0 6px;
+      color: #6d1028;
+      font-size: 1.3rem;
+    }
+
+    .niveles-consultas p {
+      max-width: 52ch;
+      margin: 0;
+      color: #493840;
+      line-height: 1.7;
+    }
+
+    .consultas-accion {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .consultas-datos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 18px;
+      font-size: 15px;
+    }
+
+    .consultas-datos a {
+      color: #6d1028;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+      text-underline-offset: 4px;
+    }
+
+    .pie-nota {
+      color: #ead9df;
+      font-size: 14px;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .nivel {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nivel {
+        padding: 22px;
+      }
+
+      .nivel h2 {
+        font-size: 1.5rem;
+      }
+
+      .nivel p {
+        font-size: 1rem;
+      }
+
+      .nivel-etapa {
+        padding: 18px 20px;
+      }
+
+      .niveles-consultas {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ENLACE PARA ACCESIBILIDAD -->
+  <a class="salto" href="#contenido">
+    Saltar al contenido
+  </a>
+
+  <!-- ENCABEZADO -->
+  <header class="encabezado">
+
+    <a class="marca" href="index.html" aria-label="Ir al inicio">
+
+      <img
+        class="escudo"
+        src="logo.png"
+        alt="Escudo del Colegio Santa Isabel de Hungría"
+      >
+
+      <span class="marca-texto">
+        <strong>Santa Isabel de Hungría</strong>
+        <small>Sitio web institucional</small>
+      </span>
+
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="menu"
+      aria-label="Abrir o cerrar el menú"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav
+      id="menu"
+      class="menu"
+      aria-label="Navegación principal"
+    >
+      <a href="index.html">Inicio</a>
+      <a href="institucion.html">La institución</a>
+      <a class="activo" href="niveles.html" aria-current="page">
+        Niveles
+      </a>
+      <a href="noticias.html">Novedades</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main id="contenido">
+
+    <section class="cabecera-pagina">
+
+      <p class="etiqueta">PROPUESTA EDUCATIVA</p>
+
+      <h1>Niveles educativos</h1>
+
+      <p>
+        Conocé nuestra propuesta educativa y las etapas de formación
+        que acompañan el crecimiento de los estudiantes.
+      </p>
+
+    </section>
+
+    <section class="seccion contenido-pagina">
+
+      <div class="niveles-contenedor">
+
+        <!--
+          Si el colegio suma otros niveles, copiá un bloque
+          <article class="nivel"> completo, pegalo en su lugar y
+          cambiá el título, los párrafos y la lista de la etapa.
+          Si agregás uno, sumalo también al acceso rápido de arriba.
+        -->
+
+        <!-- ACCESO RÁPIDO -->
+        <nav class="niveles-indice" aria-label="Niveles educativos">
+          <p>Ir a:</p>
+          <a href="#inicial">Nivel inicial</a>
+          <a href="#primario">Nivel primario</a>
+          <a href="#secundario">Nivel secundario</a>
+        </nav>
+
+        <!--
+          REVISAR: los textos de Nivel inicial y Nivel primario son una
+          propuesta general. Reemplazalos o ajustalos con la información
+          oficial del colegio (edades, salas, propuesta pedagógica, etc.).
+        -->
+
+        <!-- NIVEL NIVEL INICIAL -->
+        <article class="nivel" id="inicial" aria-labelledby="t-inicial">
+
+          <div>
+            <h2 id="t-inicial">Nivel inicial</h2>
+
+            <p>
+              El nivel inicial es el primer encuentro de los niños con la vida escolar. Acompaña sus primeros pasos en la escuela a través del juego, la exploración y la convivencia con sus compañeros y docentes.
+            </p>
+
+            <p>
+              Es una etapa para despertar la curiosidad, aprender a compartir y construir los primeros vínculos con la escuela, junto a las familias.
+            </p>
+          </div>
+
+          <aside class="nivel-etapa" aria-labelledby="t-etapa-inicial">
+            <h3 id="t-etapa-inicial">En esta etapa trabajamos</h3>
+
+            <ul>
+              <li>Jugar y explorar</li>
+              <li>Compartir y convivir con otros</li>
+              <li>Expresarse y comunicarse</li>
+              <li>Despertar la curiosidad</li>
+              <li>Ganar confianza y autonomía</li>
+            </ul>
+          </aside>
+
+        </article>
+
+        <!-- NIVEL NIVEL PRIMARIO -->
+        <article class="nivel" id="primario" aria-labelledby="t-primario">
+
+          <div>
+            <h2 id="t-primario">Nivel primario</h2>
+
+            <p>
+              El nivel primario acompaña a los niños en la construcción de los aprendizajes básicos. Fortalece la lectura, la escritura y el razonamiento, y promueve el respeto, la responsabilidad y el compañerismo.
+            </p>
+
+            <p>
+              Es una etapa para aprender a trabajar con otros, formar hábitos de estudio y disfrutar de descubrir cosas nuevas.
+            </p>
+          </div>
+
+          <aside class="nivel-etapa" aria-labelledby="t-etapa-primario">
+            <h3 id="t-etapa-primario">En esta etapa trabajamos</h3>
+
+            <ul>
+              <li>Leer y escribir con comprensión</li>
+              <li>Desarrollar el razonamiento y el cálculo</li>
+              <li>Trabajar en equipo</li>
+              <li>Formar hábitos de estudio</li>
+              <li>Practicar el respeto y la responsabilidad</li>
+            </ul>
+          </aside>
+
+        </article>
+
+        <!-- NIVEL NIVEL SECUNDARIO -->
+        <article class="nivel" id="secundario" aria-labelledby="t-secundario">
+
+          <div>
+            <h2 id="t-secundario">Nivel secundario</h2>
+
+            <p>
+              La educación secundaria acompaña a los estudiantes en una etapa de crecimiento personal y académico. Busca fortalecer los conocimientos adquiridos, el pensamiento crítico, la autonomía y la capacidad de resolver problemas.
+            </p>
+
+            <p>
+              Además, promueve la participación responsable, el respeto por las diferencias y la preparación para continuar los estudios y afrontar nuevos desafíos.
+            </p>
+          </div>
+
+          <aside class="nivel-etapa" aria-labelledby="t-etapa-secundario">
+            <h3 id="t-etapa-secundario">En esta etapa trabajamos</h3>
+
+            <ul>
+              <li>Fortalecer los conocimientos adquiridos</li>
+              <li>Desarrollar el pensamiento crítico</li>
+              <li>Ganar autonomía</li>
+              <li>Resolver problemas</li>
+              <li>Participar con responsabilidad</li>
+              <li>Respetar las diferencias</li>
+              <li>Prepararse para continuar los estudios y afrontar nuevos desafíos</li>
+            </ul>
+          </aside>
+
+        </article>
+
+        <!-- ORIENTACIÓN EN INFORMÁTICA -->
+        <!--
+          REVISAR: texto general. Completalo con los datos oficiales:
+          en qué niveles se ofrece, qué materias o talleres incluye y si
+          otorga algún título.
+        -->
+        <section class="nivel-orientacion" aria-labelledby="t-informatica">
+          <h2 id="t-informatica">Orientación en informática</h2>
+          <p>
+            Nuestro colegio tiene una orientación en informática. Esta
+            propuesta acerca a los estudiantes al mundo de la tecnología
+            y les ofrece herramientas para desenvolverse en un entorno
+            cada vez más digital.
+          </p>
+        </section>
+
+        <!-- CONSULTAS -->
+        <section class="niveles-consultas" aria-labelledby="t-consultas">
+
+          <div>
+            <h2 id="t-consultas">¿Querés saber más?</h2>
+            <p>
+              Si tenés dudas sobre alguno de los niveles o sobre las
+              inscripciones, comunicate con el colegio.
+            </p>
+          </div>
+
+          <div class="consultas-accion">
+            <a class="boton" href="contacto.html">Ir a Contacto</a>
+
+            <div class="consultas-datos">
+              <a href="tel:+543874212110">387 421-2110</a>
+              <a href="mailto:colsantaisabeldehungria@gmail.com">colsantaisabeldehungria@gmail.com</a>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="pie">
+
+    <div class="pie-contenido">
+
+      <a class="marca marca-pie" href="index.html">
+
+        <img
+          class="escudo"
+          src="logo.png"
+          alt="Escudo del Colegio Santa Isabel de Hungría"
+        >
+
+        <span class="marca-texto">
+          <strong>Santa Isabel de Hungría</strong>
+          <small>Sitio web institucional</small>
+        </span>
+
+      </a>
+
+      <div>
+        <h3>Navegación</h3>
+
+        <nav class="pie-enlaces" aria-label="Enlaces del sitio">
+          <a href="index.html">Inicio</a>
+          <a href="institucion.html">La institución</a>
+          <a href="niveles.html">Niveles</a>
+          <a href="noticias.html">Novedades</a>
+          <a href="contacto.html">Contacto</a>
+        </nav>
+      </div>
+
+      <div>
+        <h3>Sitio oficial</h3>
+        <nav class="pie-enlaces" aria-label="Sitio oficial">
+          <a href="https://colegiosantaisabeldehungria.com" target="_blank" rel="noopener noreferrer">Sitio web ↗</a>
+        </nav>
+      </div>
+
+    </div>
+
+    <div class="pie-final">
+
+      <p>
+        © <span id="anio"></span> Colegio Santa Isabel de Hungría.
+        Todos los derechos reservados.
+      </p>
+
+      <p>Un espacio para aprender y crecer.</p>
+
+    </div>
+
+  </footer>
+
+  <script>
+    const anio = document.getElementById("anio");
+
+    if (anio) {
+      anio.textContent = new Date().getFullYear();
+    }
+  </script>
+
+  <!-- BOTÓN Y VENTANA DEL CHATBOT -->
+  <button class="chatbot-toggle" type="button"
+    aria-label="Abrir asistente virtual"
+    aria-expanded="false" aria-controls="chatbot-panel">
+    <span aria-hidden="true">✦</span>
+    <span class="chatbot-texto">¿Necesitás ayuda?</span>
+  </button>
+
+  <section class="chatbot-panel" id="chatbot-panel"
+    aria-label="Asistente virtual" hidden>
+    <div class="chatbot-cabecera">
+      <div>
+        <strong>Asistente del colegio</strong>
+        <small>Consultas frecuentes</small>
+      </div>
+      <button class="chatbot-cerrar" type="button"
+        aria-label="Cerrar asistente">×</button>
+    </div>
+
+    <div class="chatbot-mensajes" aria-live="polite">
+      <p class="mensaje mensaje-bot">
+        ¡Hola! 👋 Soy el asistente virtual del colegio.
+        ¿Sobre qué te gustaría consultar?
+      </p>
+    </div>
+
+    <div class="chatbot-opciones">
+      <button type="button" data-pregunta="inscripciones">
+        Inscripciones
+      </button>
+      <button type="button" data-pregunta="niveles">
+        Niveles educativos
+      </button>
+      <button type="button" data-pregunta="horarios">
+        Horarios
+      </button>
+      <button type="button" data-pregunta="contacto">
+        Contacto
+      </button>
+    </div>
+
+    <form class="chatbot-form">
+      <label class="solo-lectores" for="chatbot-input">
+        Escribí tu consulta
+      </label>
+      <input id="chatbot-input" name="consulta"
+        type="text" maxlength="300"
+        placeholder="Escribí tu consulta..."
+        autocomplete="off" required>
+      <button type="submit" aria-label="Enviar consulta">➤</button>
+    </form>
+    <p class="chatbot-aviso">Asistente automático de consultas frecuentes.</p>
+  </section>
+
+
+  <button class="volver-arriba" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+</body>
+</html>

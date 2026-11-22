@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6d1028">
+
+  <meta
+    name="description"
+    content="Conocé la historia, los valores y el proyecto educativo del Colegio Santa Isabel de Hungría."
+  >
+
+  <title>La institución | Colegio Santa Isabel de Hungría</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="configuracion.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <style>
+    /* ---------- Accesibilidad ---------- */
+    .salto {
+      position: absolute;
+      top: -100px;
+      left: 15px;
+      z-index: 1000;
+      padding: 12px 18px;
+      background: #6d1028;
+      color: #ffffff;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .salto:focus {
+      top: 15px;
+    }
+
+    .inst-layout a:focus-visible {
+      outline: 3px solid #6d1028;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: smooth;
+      }
+    }
+
+    /* ---------- Estructura: índice + contenido ---------- */
+    .inst-layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 56px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ---------- Índice ---------- */
+    .inst-indice {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+    }
+
+    .inst-indice h2 {
+      margin: 0 0 12px;
+      color: #75616a;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .inst-indice ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-left: 2px solid #ead9df;
+    }
+
+    .inst-indice a {
+      display: block;
+      padding: 7px 0 7px 16px;
+      margin-left: -2px;
+      border-left: 2px solid transparent;
+      color: #493840;
+      font-size: 15px;
+      line-height: 1.4;
+      text-decoration: none;
+    }
+
+    .inst-indice a:hover {
+      color: #6d1028;
+    }
+
+    .inst-indice a[aria-current="true"] {
+      border-left-color: #6d1028;
+      color: #6d1028;
+      font-weight: 700;
+    }
+
+    /* ---------- Texto ---------- */
+    .inst-contenido section {
+      padding: 0 0 40px;
+      margin: 0 0 40px;
+      border-bottom: 1px solid #ead9df;
+      scroll-margin-top: 90px;
+    }
+
+    .inst-contenido section:last-child {
+      margin-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .inst-contenido h2 {
+      margin: 0 0 16px;
+      color: #6d1028;
+      font-size: 1.7rem;
+      line-height: 1.25;
+    }
+
+    .inst-contenido p {
+      max-width: 68ch;
+      margin: 0 0 16px;
+      color: #493840;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .inst-contenido p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Presentación: primer párrafo con más peso */
+    .inst-intro {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: #2f2429;
+    }
+
+    /* ---------- Santa Isabel ---------- */
+    .inst-santa {
+      padding: 22px 26px;
+      background: #fffafb;
+      border-left: 4px solid #6d1028;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .inst-santa p {
+      max-width: 62ch;
+    }
+
+    /* ---------- Valores ---------- */
+    .inst-valores {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .inst-valores li {
+      margin: 0;
+      padding: 18px 20px;
+      background: #ffffff;
+      border: 1px solid #ead9df;
+      border-radius: 12px;
+    }
+
+    .inst-valores strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #6d1028;
+      font-size: 1.05rem;
+    }
+
+    .inst-valores span {
+      color: #493840;
+      line-height: 1.6;
+    }
+
+    /* ---------- Pie ---------- */
+    .pie-nota {
+      color: #ead9df;
+      font-size: 14px;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .inst-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .inst-indice {
+        position: static;
+      }
+
+      .inst-indice ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        border-left: 0;
+      }
+
+      .inst-indice a {
+        margin: 0;
+        padding: 8px 14px;
+        background: #ffffff;
+        border: 1px solid #d9bfc8;
+        border-radius: 999px;
+      }
+
+      .inst-indice a[aria-current="true"] {
+        background: #6d1028;
+        border-color: #6d1028;
+        color: #ffffff;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .inst-contenido h2 {
+        font-size: 1.45rem;
+      }
+
+      .inst-contenido p {
+        font-size: 1rem;
+      }
+
+      .inst-intro {
+        font-size: 1.1rem;
+      }
+
+      .inst-santa {
+        padding: 18px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a class="salto" href="#contenido">
+    Saltar al contenido
+  </a>
+
+  <!-- ENCABEZADO -->
+  <header class="encabezado">
+
+    <a class="marca" href="index.html" aria-label="Ir al inicio">
+
+      <img
+        class="escudo"
+        src="logo.png"
+        alt="Escudo del Colegio Santa Isabel de Hungría"
+      >
+
+      <span class="marca-texto">
+        <strong>Santa Isabel de Hungría</strong>
+        <small>Sitio web institucional</small>
+      </span>
+
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="menu"
+      aria-label="Abrir o cerrar el menú"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav
+      id="menu"
+      class="menu"
+      aria-label="Navegación principal"
+    >
+      <a href="index.html">Inicio</a>
+      <a class="activo" href="institucion.html" aria-current="page">
+        La institución
+      </a>
+      <a href="niveles.html">Niveles</a>
+      <a href="noticias.html">Novedades</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main id="contenido">
+
+    <section class="cabecera-pagina">
+
+      <p class="etiqueta">
+        CONOCÉ NUESTRA INSTITUCIÓN
+      </p>
+
+      <h1>La institución</h1>
+
+      <p>
+        Colegio Santa Isabel de Hungría: un espacio de aprendizaje,
+        formación y crecimiento personal.
+      </p>
+
+    </section>
+
+    <div class="seccion contenido-pagina">
+
+      <div class="inst-layout">
+
+        <!-- ÍNDICE -->
+        <nav class="inst-indice" aria-labelledby="indice-titulo">
+          <h2 id="indice-titulo">En esta página</h2>
+          <ul>
+            <li><a href="#presentacion">Presentación</a></li>
+            <li><a href="#historia">Historia</a></li>
+            <li><a href="#santa-isabel">Santa Isabel de Hungría</a></li>
+            <li><a href="#identidad">Identidad institucional</a></li>
+            <li><a href="#proyecto">Proyecto educativo</a></li>
+            <li><a href="#valores">Valores educativos</a></li>
+            <li><a href="#comunidad">Comunidad educativa</a></li>
+          </ul>
+        </nav>
+
+        <!-- CONTENIDO -->
+        <div class="inst-contenido">
+
+          <section id="presentacion" aria-labelledby="t-presentacion">
+            <h2 id="t-presentacion">Presentación</h2>
+
+            <p class="inst-intro">
+              El Colegio Santa Isabel de Hungría es una institución
+              educativa dedicada a la formación de sus estudiantes,
+              promoviendo el aprendizaje, el respeto, la responsabilidad
+              y la convivencia.
+            </p>
+
+            <p>
+              La escuela constituye un espacio donde los alumnos pueden
+              desarrollar sus conocimientos, capacidades y valores,
+              preparándose para afrontar los desafíos de la vida cotidiana.
+            </p>
+
+            <p>
+              A través de las actividades educativas, se busca acompañar
+              el crecimiento de los estudiantes y fomentar la
+              participación, el compromiso y el trabajo en equipo,
+              favoreciendo una educación integral.
+            </p>
+          </section>
+
+          <section id="historia" aria-labelledby="t-historia">
+            <h2 id="t-historia">Historia</h2>
+
+            <!--
+              PENDIENTE: completar con datos confirmados por el colegio
+              (año de fundación, fundadores, fechas y hechos importantes).
+              Cuando lo tengas, reemplazá el párrafo de abajo.
+            -->
+            <p>
+              Próximamente publicaremos aquí la historia del colegio, con
+              sus fechas y acontecimientos más importantes.
+            </p>
+          </section>
+
+          <section id="santa-isabel" aria-labelledby="t-santa-isabel">
+            <h2 id="t-santa-isabel">¿Quién fue Santa Isabel de Hungría?</h2>
+
+            <div class="inst-santa">
+              <p>
+                Santa Isabel de Hungría fue una mujer cristiana del
+                siglo XIII, reconocida por su solidaridad, humildad y
+                dedicación a las personas necesitadas. Es recordada por
+                su compromiso con los pobres y los enfermos, y por su
+                ejemplo de servicio a los demás.
+              </p>
+
+              <p>
+                Su figura representa valores como el amor al prójimo,
+                la generosidad, la empatía y la solidaridad, que pueden
+                servir como inspiración para la formación humana y
+                espiritual de la comunidad educativa.
+              </p>
+            </div>
+          </section>
+
+          <section id="identidad" aria-labelledby="t-identidad">
+            <h2 id="t-identidad">Identidad institucional</h2>
+
+            <p>
+              La identidad del Colegio Santa Isabel de Hungría se
+              refleja en el compromiso con la educación, la formación
+              personal y la convivencia respetuosa. La institución busca
+              promover un ambiente en el que cada estudiante pueda
+              aprender, expresarse, compartir experiencias y desarrollar
+              sus capacidades.
+            </p>
+
+            <p>
+              El respeto, la responsabilidad, la solidaridad, la
+              honestidad y el compañerismo son valores fundamentales para
+              construir una comunidad educativa basada en el diálogo,
+              la inclusión y el compromiso con los demás.
+            </p>
+          </section>
+
+          <section id="proyecto" aria-labelledby="t-proyecto">
+            <h2 id="t-proyecto">Proyecto educativo</h2>
+
+            <p>
+              El proyecto educativo tiene como propósito acompañar el
+              desarrollo académico y personal de los estudiantes,
+              favoreciendo la adquisición de conocimientos, el
+              pensamiento crítico, la creatividad y la autonomía.
+            </p>
+
+            <p>
+              También es importante fomentar el trabajo colaborativo,
+              la participación responsable, el respeto por las
+              diferencias y el cuidado del entorno. De esta manera, la
+              educación contribuye a formar personas capaces de
+              participar activamente en la sociedad.
+            </p>
+          </section>
+
+          <section id="valores" aria-labelledby="t-valores">
+            <h2 id="t-valores">Valores educativos</h2>
+
+            <!--
+              REVISAR: esta lista es una propuesta general. Confirmala
+              con la información oficial del colegio antes de publicar.
+            -->
+            <p>
+              Los valores que guían la vida escolar y la convivencia
+              en nuestra comunidad:
+            </p>
+
+            <ul class="inst-valores">
+              <li>
+                <strong>Respeto</strong>
+                <span>Reconocer y valorar a cada persona.</span>
+              </li>
+              <li>
+                <strong>Responsabilidad</strong>
+                <span>Cumplir con los compromisos y deberes.</span>
+              </li>
+              <li>
+                <strong>Solidaridad</strong>
+                <span>Ayudar y acompañar a quienes lo necesitan.</span>
+              </li>
+              <li>
+                <strong>Compañerismo</strong>
+                <span>Compartir, colaborar y trabajar en equipo.</span>
+              </li>
+              <li>
+                <strong>Honestidad</strong>
+                <span>Actuar con sinceridad y transparencia.</span>
+              </li>
+              <li>
+                <strong>Compromiso</strong>
+                <span>Participar activamente en el aprendizaje y la vida escolar.</span>
+              </li>
+            </ul>
+          </section>
+
+          <section id="comunidad" aria-labelledby="t-comunidad">
+            <h2 id="t-comunidad">Comunidad educativa</h2>
+
+            <p>
+              La comunidad educativa está formada por estudiantes,
+              docentes, directivos, familias y demás personas que
+              colaboran en la vida escolar. La comunicación y el
+              trabajo conjunto entre sus integrantes son importantes
+              para acompañar las trayectorias educativas y fortalecer
+              los vínculos.
+            </p>
+          </section>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="pie">
+
+    <div class="pie-contenido">
+
+      <a class="marca marca-pie" href="index.html">
+
+        <img
+          class="escudo"
+          src="logo.png"
+          alt="Escudo del Colegio Santa Isabel de Hungría"
+        >
+
+        <span class="marca-texto">
+          <strong>Santa Isabel de Hungría</strong>
+          <small>Sitio web institucional</small>
+        </span>
+
+      </a>
+
+      <div>
+        <h3>Navegación</h3>
+
+        <nav class="pie-enlaces" aria-label="Enlaces del sitio">
+          <a href="index.html">Inicio</a>
+          <a href="institucion.html">La institución</a>
+          <a href="niveles.html">Niveles</a>
+          <a href="noticias.html">Novedades</a>
+          <a href="contacto.html">Contacto</a>
+        </nav>
+      </div>
+
+      <div>
+        <h3>Redes y sitio oficial</h3>
+        <nav class="pie-enlaces" aria-label="Redes y sitio oficial">
+          <a href="https://www.facebook.com/people/Colegio-Santa-Isabel-De-Hungria-Oficial/100088083434587/" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
+          <a href="https://colegiosantaisabeldehungria.com" target="_blank" rel="noopener noreferrer">Sitio web ↗</a>
+        </nav>
+      </div>
+
+    </div>
+
+    <div class="pie-final">
+      <p>
+        © <span id="anio"></span> Colegio Santa Isabel de Hungría.
+        Todos los derechos reservados.
+      </p>
+
+      <p>Un espacio para aprender y crecer.</p>
+    </div>
+
+  </footer>
+
+  <script>
+    /* Año del pie */
+    const anio = document.getElementById("anio");
+
+    if (anio) {
+      anio.textContent = new Date().getFullYear();
+    }
+
+    /* Índice: marca la sección que se está leyendo */
+    (function () {
+      const enlaces = Array.from(
+        document.querySelectorAll(".inst-indice a")
+      );
+      const secciones = enlaces
+        .map(function (a) {
+          return document.querySelector(a.getAttribute("href"));
+        })
+        .filter(Boolean);
+
+      if (!("IntersectionObserver" in window) || !secciones.length) return;
+
+      function marcar(id) {
+        enlaces.forEach(function (a) {
+          if (a.getAttribute("href") === "#" + id) {
+            a.setAttribute("aria-current", "true");
+          } else {
+            a.removeAttribute("aria-current");
+          }
+        });
+      }
+
+      const observador = new IntersectionObserver(
+        function (entradas) {
+          entradas.forEach(function (e) {
+            if (e.isIntersecting) marcar(e.target.id);
+          });
+        },
+        { rootMargin: "-15% 0px -70% 0px" }
+      );
+
+      secciones.forEach(function (s) {
+        observador.observe(s);
+      });
+
+      marcar(secciones[0].id);
+    })();
+  </script>
+
+  <!-- BOTÓN Y VENTANA DEL CHATBOT -->
+  <button class="chatbot-toggle" type="button"
+    aria-label="Abrir asistente virtual"
+    aria-expanded="false" aria-controls="chatbot-panel">
+    <span aria-hidden="true">✦</span>
+    <span class="chatbot-texto">¿Necesitás ayuda?</span>
+  </button>
+
+  <section class="chatbot-panel" id="chatbot-panel"
+    aria-label="Asistente virtual" hidden>
+    <div class="chatbot-cabecera">
+      <div>
+        <strong>Asistente del colegio</strong>
+        <small>Consultas frecuentes</small>
+      </div>
+      <button class="chatbot-cerrar" type="button"
+        aria-label="Cerrar asistente">×</button>
+    </div>
+
+    <div class="chatbot-mensajes" aria-live="polite">
+      <p class="mensaje mensaje-bot">
+        ¡Hola! 👋 Soy el asistente virtual del colegio.
+        ¿Sobre qué te gustaría consultar?
+      </p>
+    </div>
+
+    <div class="chatbot-opciones">
+      <button type="button" data-pregunta="inscripciones">
+        Inscripciones
+      </button>
+      <button type="button" data-pregunta="niveles">
+        Niveles educativos
+      </button>
+      <button type="button" data-pregunta="horarios">
+        Horarios
+      </button>
+      <button type="button" data-pregunta="contacto">
+        Contacto
+      </button>
+    </div>
+
+    <form class="chatbot-form">
+      <label class="solo-lectores" for="chatbot-input">
+        Escribí tu consulta
+      </label>
+      <input id="chatbot-input" name="consulta"
+        type="text" maxlength="300"
+        placeholder="Escribí tu consulta..."
+        autocomplete="off" required>
+      <button type="submit" aria-label="Enviar consulta">➤</button>
+    </form>
+    <p class="chatbot-aviso">Asistente automático de consultas frecuentes.</p>
+  </section>
+
+
+  <button class="volver-arriba" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+</body>
+</html>

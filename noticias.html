@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6d1028">
+
+  <meta
+    name="description"
+    content="Novedades, comunicados y avisos del Colegio Santa Isabel de Hungría."
+  >
+
+  <title>Novedades | Colegio Santa Isabel de Hungría</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="configuracion.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <style>
+    /* ---------- Accesibilidad ---------- */
+    .salto {
+      position: absolute;
+      top: -100px;
+      left: 15px;
+      z-index: 1000;
+      padding: 12px 18px;
+      background: #6d1028;
+      color: #ffffff;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .salto:focus {
+      top: 15px;
+    }
+
+    .novedades-contenedor a:focus-visible,
+    .novedades-contenedor button:focus-visible {
+      outline: 3px solid #6d1028;
+      outline-offset: 3px;
+    }
+
+    /* ---------- Estructura ---------- */
+    .novedades-contenedor {
+      max-width: 1150px;
+      margin: 0 auto;
+    }
+
+    /* ---------- Filtros ---------- */
+    .novedades-filtros {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 8px;
+      padding: 0;
+      border: 0;
+    }
+
+    .novedades-filtros legend {
+      margin-bottom: 10px;
+      padding: 0;
+      color: #75616a;
+      font-size: 15px;
+    }
+
+    .filtro {
+      min-height: 44px;
+      padding: 8px 18px;
+      background: #ffffff;
+      color: #6d1028;
+      border: 1.5px solid #d9bfc8;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .filtro:hover {
+      background: #f0dce2;
+    }
+
+    .filtro[aria-pressed="true"] {
+      background: #6d1028;
+      border-color: #6d1028;
+      color: #ffffff;
+    }
+
+    .novedades-conteo {
+      margin: 14px 0 22px;
+      color: #75616a;
+      font-size: 14px;
+    }
+
+    /* ---------- Tarjetas ---------- */
+    .novedades-lista {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 22px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .novedad {
+      --acento: #6d1028;
+      --tinte: #f0dce2;
+      display: flex;
+      flex-direction: column;
+      padding: 24px 26px 26px;
+      background: #ffffff;
+      color: #2f2429;
+      border: 1px solid #ead9df;
+      border-top: 5px solid var(--acento);
+      border-radius: 14px;
+    }
+
+    .novedad[data-categoria="actividades"] {
+      --acento: #8a4b0f;
+      --tinte: #f6e6d3;
+    }
+
+    .novedad[data-categoria="avisos"] {
+      --acento: #1d5a63;
+      --tinte: #d9ecee;
+    }
+
+    .novedad[hidden] {
+      display: none;
+    }
+
+    .novedad-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 14px;
+      margin-bottom: 14px;
+    }
+
+    .novedad-categoria {
+      padding: 4px 12px;
+      background: var(--tinte);
+      color: var(--acento);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .novedad-fecha {
+      color: #75616a;
+      font-size: 14px;
+    }
+
+    .novedad h2 {
+      margin: 0 0 10px;
+      color: var(--acento);
+      font-size: 1.25rem;
+      line-height: 1.3;
+    }
+
+    .novedad p {
+      max-width: 65ch;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    .novedad-enlace {
+      align-self: flex-start;
+      margin-top: 18px;
+      color: var(--acento);
+      font-weight: 700;
+      text-underline-offset: 4px;
+    }
+
+    /* La primera novedad ocupa todo el ancho: es la más reciente */
+    .novedad-destacada {
+      grid-column: 1 / -1;
+      padding: 30px 34px 32px;
+    }
+
+    .novedad-destacada h2 {
+      font-size: 1.6rem;
+    }
+
+    /* ---------- Estado vacío ---------- */
+    .novedades-vacio {
+      padding: 28px;
+      background: #fffafb;
+      border: 1.5px dashed #d9bfc8;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .novedades-vacio p {
+      margin: 0 0 6px;
+      line-height: 1.6;
+    }
+
+    /* ---------- Nota final ---------- */
+    .novedades-aviso {
+      margin-top: 36px;
+      padding: 20px 22px;
+      background: #fffafb;
+      border-left: 4px solid #6d1028;
+      border-radius: 8px;
+      line-height: 1.7;
+    }
+
+    .novedades-aviso p {
+      margin: 0;
+    }
+
+    .novedades-aviso a {
+      color: #6d1028;
+      font-weight: 600;
+    }
+
+    .pie-nota {
+      color: #ead9df;
+      font-size: 14px;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 720px) {
+      .novedad,
+      .novedad-destacada {
+        padding: 20px;
+      }
+
+      .novedad-destacada h2 {
+        font-size: 1.35rem;
+      }
+
+      .novedades-lista {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .filtro {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ACCESIBILIDAD -->
+  <a class="salto" href="#contenido">
+    Saltar al contenido
+  </a>
+
+  <!-- ENCABEZADO -->
+  <header class="encabezado">
+
+    <a class="marca" href="index.html" aria-label="Ir al inicio">
+
+      <img
+        class="escudo"
+        src="logo.png"
+        alt="Escudo del Colegio Santa Isabel de Hungría"
+      >
+
+      <span class="marca-texto">
+        <strong>Santa Isabel de Hungría</strong>
+        <small>Sitio web institucional</small>
+      </span>
+
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="menu"
+      aria-label="Abrir o cerrar el menú"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav
+      id="menu"
+      class="menu"
+      aria-label="Navegación principal"
+    >
+      <a href="index.html">Inicio</a>
+      <a href="institucion.html">La institución</a>
+      <a href="niveles.html">Niveles</a>
+      <a class="activo" href="noticias.html" aria-current="page">
+        Novedades
+      </a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main id="contenido">
+
+    <section class="cabecera-pagina">
+
+      <p class="etiqueta">ACTUALIDAD</p>
+
+      <h1>Novedades y comunicados</h1>
+
+      <p>
+        Un espacio para conocer las actividades, los avisos y las
+        novedades de nuestra comunidad educativa.
+      </p>
+
+    </section>
+
+    <section class="seccion contenido-pagina">
+
+      <div class="novedades-contenedor">
+
+        <!-- FILTROS (se muestran solo si JavaScript está activo) -->
+        <fieldset class="novedades-filtros" id="filtros" hidden>
+          <legend>Filtrar por tipo</legend>
+          <button class="filtro" type="button" data-filtro="todas" aria-pressed="true">Todas</button>
+          <button class="filtro" type="button" data-filtro="comunicados" aria-pressed="false">Comunicados</button>
+          <button class="filtro" type="button" data-filtro="actividades" aria-pressed="false">Actividades</button>
+          <button class="filtro" type="button" data-filtro="avisos" aria-pressed="false">Avisos</button>
+        </fieldset>
+
+        <p class="novedades-conteo" id="conteo" role="status" aria-live="polite"></p>
+
+        <!--
+          CÓMO PUBLICAR UNA NOVEDAD
+          1. Copiá una de las tarjetas de abajo y pegala PRIMERO en la lista
+             (la primera se muestra destacada, a todo el ancho).
+          2. Cambiá data-categoria por: comunicados, actividades o avisos.
+          3. Cambiá el texto de la categoría, la fecha, el título y el resumen.
+             La fecha va dos veces: en datetime="AAAA-MM-DD" y en el texto visible.
+          4. Si no tiene fecha, borrá la línea <time>.
+          5. Si hay una página o archivo con más información, agregá:
+             <a class="novedad-enlace" href="archivo.pdf">Ver comunicado completo</a>
+        -->
+
+        <ul class="novedades-lista" id="lista">
+
+          <li class="novedad novedad-destacada" data-categoria="comunicados">
+            <div class="novedad-meta">
+              <span class="novedad-categoria">Comunicados</span>
+            </div>
+            <h2>Comunicados institucionales</h2>
+            <p>
+              Aquí publicaremos los comunicados dirigidos a estudiantes,
+              familias y docentes, con información importante sobre la
+              vida escolar.
+            </p>
+          </li>
+
+          <li class="novedad" data-categoria="actividades">
+            <div class="novedad-meta">
+              <span class="novedad-categoria">Actividades</span>
+            </div>
+            <h2>Actividades institucionales</h2>
+            <p>
+              Compartiremos jornadas educativas, encuentros, proyectos
+              escolares y otras actividades de la comunidad.
+            </p>
+          </li>
+
+          <li class="novedad" data-categoria="avisos">
+            <div class="novedad-meta">
+              <span class="novedad-categoria">Avisos</span>
+            </div>
+            <h2>Información importante</h2>
+            <p>
+              Avisos de interés para las familias y los estudiantes, con
+              información clara y actualizada.
+            </p>
+          </li>
+
+        </ul>
+
+        <!-- ESTADO VACÍO (aparece si un filtro no tiene novedades) -->
+        <div class="novedades-vacio" id="vacio" hidden>
+          <p><strong>Todavía no hay novedades de este tipo.</strong></p>
+          <p>Probá con otra categoría o elegí “Todas”.</p>
+        </div>
+
+        <div class="novedades-aviso">
+          <p>
+            <strong>¿No encontrás lo que buscás?</strong>
+            Escribinos desde la página de
+            <a href="contacto.html">Contacto</a> o seguinos en
+            <a
+              href="https://www.facebook.com/people/Colegio-Santa-Isabel-De-Hungria-Oficial/100088083434587/"
+              href="https://www.twitch.tv/radiohungria" target="_blank" rel="noopener noreferrer">Twitch ↗</href=>
+              target="_blank"
+              rel="noopener noreferrer"
+            >Facebook</a>
+            <a
+              href="https://www.twitch.tv/radiohungria"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Twitch ↗</a>
+            para enterarte de las últimas novedades.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="pie">
+
+    <div class="pie-contenido">
+
+      <a class="marca marca-pie" href="index.html">
+
+        <img
+          class="escudo"
+          src="logo.png"
+          alt="Escudo del Colegio Santa Isabel de Hungría"
+        >
+
+        <span class="marca-texto">
+          <strong>Santa Isabel de Hungría</strong>
+          <small>Sitio web institucional</small>
+        </span>
+
+      </a>
+
+      <div>
+        <h3>Explorar</h3>
+
+        <nav class="pie-enlaces" aria-label="Enlaces del sitio">
+          <a href="index.html">Inicio</a>
+          <a href="institucion.html">La institución</a>
+          <a href="niveles.html">Niveles</a>
+          <a href="noticias.html">Novedades</a>
+          <a href="contacto.html">Contacto</a>
+        </nav>
+      </div>
+
+      <div>
+        <h3>Redes sociales</h3>
+
+        <nav class="pie-enlaces" aria-label="Redes sociales">
+          <a
+            href="https://www.facebook.com/people/Colegio-Santa-Isabel-De-Hungria-Oficial/100088083434587/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Facebook ↗
+          </a>
+
+          <a
+            href="https://colegiosantaisabeldehungria.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Sitio web ↗
+          </a>
+        </nav>
+
+        <p class="pie-nota">
+          Colegio Santa Isabel de Hungría
+        </p>
+      </div>
+
+    </div>
+
+    <div class="pie-final">
+
+      <p>
+        © <span id="anio"></span> Colegio Santa Isabel de Hungría.
+        Todos los derechos reservados.
+      </p>
+
+      <a href="#contenido">Volver arriba ↑</a>
+
+    </div>
+
+  </footer>
+
+  <script>
+    /* Año del pie */
+    const anio = document.getElementById("anio");
+
+    if (anio) {
+      anio.textContent = new Date().getFullYear();
+    }
+
+    /* Filtro de novedades */
+    (function () {
+      const filtros = document.getElementById("filtros");
+      const lista = document.getElementById("lista");
+      const vacio = document.getElementById("vacio");
+      const conteo = document.getElementById("conteo");
+
+      if (!filtros || !lista) return;
+
+      const tarjetas = Array.from(lista.querySelectorAll(".novedad"));
+      const botones = Array.from(filtros.querySelectorAll(".filtro"));
+
+      filtros.hidden = false;
+
+      function texto(n) {
+        return n === 1 ? "1 novedad" : n + " novedades";
+      }
+
+      function aplicar(filtro) {
+        let visibles = 0;
+
+        tarjetas.forEach(function (tarjeta) {
+          const coincide =
+            filtro === "todas" || tarjeta.dataset.categoria === filtro;
+
+          tarjeta.hidden = !coincide;
+          tarjeta.classList.remove("novedad-destacada");
+
+          if (coincide) {
+            /* La primera visible siempre queda destacada */
+            if (visibles === 0) tarjeta.classList.add("novedad-destacada");
+            visibles++;
+          }
+        });
+
+        botones.forEach(function (boton) {
+          boton.setAttribute(
+            "aria-pressed",
+            String(boton.dataset.filtro === filtro)
+          );
+        });
+
+        vacio.hidden = visibles !== 0;
+        lista.hidden = visibles === 0;
+        conteo.textContent = "Mostrando " + texto(visibles);
+      }
+
+      botones.forEach(function (boton) {
+        boton.addEventListener("click", function () {
+          aplicar(boton.dataset.filtro);
+        });
+      });
+
+      aplicar("todas");
+    })();
+  </script>
+
+  <!-- BOTÓN Y VENTANA DEL CHATBOT -->
+  <button class="chatbot-toggle" type="button"
+    aria-label="Abrir asistente virtual"
+    aria-expanded="false" aria-controls="chatbot-panel">
+    <span aria-hidden="true">✦</span>
+    <span class="chatbot-texto">¿Necesitás ayuda?</span>
+  </button>
+
+  <section class="chatbot-panel" id="chatbot-panel"
+    aria-label="Asistente virtual" hidden>
+    <div class="chatbot-cabecera">
+      <div>
+        <strong>Asistente del colegio</strong>
+        <small>Consultas frecuentes</small>
+      </div>
+      <button class="chatbot-cerrar" type="button"
+        aria-label="Cerrar asistente">×</button>
+    </div>
+
+    <div class="chatbot-mensajes" aria-live="polite">
+      <p class="mensaje mensaje-bot">
+        ¡Hola! 👋 Soy el asistente virtual del colegio.
+        ¿Sobre qué te gustaría consultar?
+      </p>
+    </div>
+
+    <div class="chatbot-opciones">
+      <button type="button" data-pregunta="inscripciones">
+        Inscripciones
+      </button>
+      <button type="button" data-pregunta="niveles">
+        Niveles educativos
+      </button>
+      <button type="button" data-pregunta="horarios">
+        Horarios
+      </button>
+      <button type="button" data-pregunta="contacto">
+        Contacto
+      </button>
+    </div>
+
+    <form class="chatbot-form">
+      <label class="solo-lectores" for="chatbot-input">
+        Escribí tu consulta
+      </label>
+      <input id="chatbot-input" name="consulta"
+        type="text" maxlength="300"
+        placeholder="Escribí tu consulta..."
+        autocomplete="off" required>
+      <button type="submit" aria-label="Enviar consulta">➤</button>
+    </form>
+    <p class="chatbot-aviso">Asistente automático de consultas frecuentes.</p>
+  </section>
+
+
+  <button class="volver-arriba" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+</body>
+</html>

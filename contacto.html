@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6d1028">
+
+  <meta
+    name="description"
+    content="Dirección, teléfonos, correo y horarios de atención del Colegio Santa Isabel de Hungría, en Salta."
+  >
+
+  <title>Contacto | Colegio Santa Isabel de Hungría</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="configuracion.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <style>
+    /* ---------- Accesibilidad ---------- */
+    .salto {
+      position: absolute;
+      top: -100px;
+      left: 15px;
+      z-index: 1000;
+      padding: 12px 18px;
+      background: #6d1028;
+      color: #ffffff;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .salto:focus {
+      top: 15px;
+    }
+
+    .contacto-contenedor a:focus-visible {
+      outline: 3px solid #6d1028;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* ---------- Estructura ---------- */
+    .contacto-contenedor {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 56px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    /* ---------- Canales (columna sin tarjeta: el foco es el formulario) ---------- */
+    .contacto-informacion h2,
+    .formulario h2 {
+      margin: 0 0 14px;
+      color: #6d1028;
+      font-size: 1.5rem;
+      line-height: 1.25;
+    }
+
+    .contacto-informacion > p {
+      max-width: 52ch;
+      margin: 0 0 22px;
+      color: #493840;
+      line-height: 1.75;
+    }
+
+    .canales {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid #ead9df;
+    }
+
+    .canales li {
+      padding: 16px 0;
+      border-bottom: 1px solid #ead9df;
+    }
+
+    .canales strong {
+      display: block;
+      margin-bottom: 2px;
+      color: #2f2429;
+    }
+
+    .canales span {
+      display: block;
+      color: #75616a;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .canales a {
+      display: inline-block;
+      margin-top: 6px;
+      color: #6d1028;
+      font-weight: 700;
+      text-underline-offset: 4px;
+    }
+
+    .canales-enlaces {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 20px;
+    }
+
+    .canales a {
+      overflow-wrap: anywhere;
+    }
+
+    .horarios {
+      width: 100%;
+      max-width: 360px;
+      margin-top: 8px;
+      border-collapse: collapse;
+    }
+
+    .horarios th,
+    .horarios td {
+      padding: 7px 0;
+      border-bottom: 1px solid #f0e4e8;
+      color: #493840;
+      font-size: 15px;
+      text-align: left;
+    }
+
+    .horarios th {
+      padding-right: 16px;
+      font-weight: 600;
+    }
+
+    .horarios tr:last-child th,
+    .horarios tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .horarios .cerrado {
+      color: #75616a;
+    }
+
+    /* ---------- Formulario ---------- */
+    .formulario {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 30px;
+      background: #ffffff;
+      border: 1px solid #ead9df;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(109, 16, 40, 0.08);
+    }
+
+    .formulario > p {
+      margin: 0 0 8px;
+      color: #493840;
+      line-height: 1.7;
+    }
+
+    .formulario label {
+      margin-top: 12px;
+      color: #493840;
+      font-weight: 600;
+    }
+
+    .formulario input:not([type="hidden"]),
+    .formulario textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #c9aeb8;
+      border-radius: 8px;
+      background: #fffafb;
+      color: #35232a;
+      font: inherit;
+      box-sizing: border-box;
+    }
+
+    .formulario input:focus,
+    .formulario textarea:focus {
+      outline: 2px solid #6d1028;
+      outline-offset: 2px;
+      border-color: #6d1028;
+    }
+
+    .formulario textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .formulario .boton {
+      align-self: flex-start;
+      min-height: 46px;
+      margin-top: 18px;
+      cursor: pointer;
+    }
+
+    .formulario .boton:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    /* Campo trampa contra spam: invisible para personas */
+    .campo-extra {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    /* Aviso fijo cuando el envío no está habilitado */
+    .formulario-nota {
+      margin: 0 0 6px;
+      padding: 12px 14px;
+      background: #f6e6d3;
+      color: #5e3208;
+      border-radius: 8px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .formulario-nota a {
+      color: #5e3208;
+      font-weight: 700;
+    }
+
+    /* Resultado del envío */
+    .respuesta-formulario {
+      margin: 14px 0 0;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .respuesta-formulario:empty {
+      display: none;
+    }
+
+    .respuesta-formulario[data-estado="ok"] {
+      background: #d9ecee;
+      color: #144148;
+    }
+
+    .respuesta-formulario[data-estado="error"] {
+      background: #f0dce2;
+      color: #6d1028;
+    }
+
+    .pie-nota {
+      color: #ead9df;
+      font-size: 14px;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .contacto-contenedor {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .formulario {
+        padding: 22px;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "School",
+    "name": "Colegio Santa Isabel de Hungría",
+    "url": "https://colegiosantaisabeldehungria.com",
+    "email": "colsantaisabeldehungria@gmail.com",
+    "telephone": ["+54 387 421-2110", "+54 387 502-2838"],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Capital Leguizamón 857",
+      "addressLocality": "Salta",
+      "addressRegion": "Salta",
+      "addressCountry": "AR"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday"],
+        "opens": "07:30",
+        "closes": "12:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Thursday",
+        "opens": "07:30",
+        "closes": "16:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Friday",
+        "opens": "07:00",
+        "closes": "12:00"
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- ACCESIBILIDAD -->
+  <a class="salto" href="#contenido">
+    Saltar al contenido
+  </a>
+
+  <!-- ENCABEZADO -->
+  <header class="encabezado">
+
+    <a class="marca" href="index.html" aria-label="Ir al inicio">
+
+      <img
+        class="escudo"
+        src="logo.png"
+        alt="Escudo del Colegio Santa Isabel de Hungría"
+      >
+
+      <span class="marca-texto">
+        <strong>Santa Isabel de Hungría</strong>
+        <small>Sitio web institucional</small>
+      </span>
+
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="menu"
+      aria-label="Abrir o cerrar el menú"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav
+      id="menu"
+      class="menu"
+      aria-label="Navegación principal"
+    >
+      <a href="index.html">Inicio</a>
+      <a href="institucion.html">La institución</a>
+      <a href="niveles.html">Niveles</a>
+      <a href="noticias.html">Novedades</a>
+      <a class="activo" href="contacto.html" aria-current="page">
+        Contacto
+      </a>
+    </nav>
+
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main id="contenido">
+
+    <section class="cabecera-pagina">
+
+      <p class="etiqueta">COMUNICACIÓN</p>
+
+      <h1>Contacto</h1>
+
+      <p>
+        Un espacio para comunicarnos y acercarnos a nuestra
+        comunidad educativa.
+      </p>
+
+    </section>
+
+    <section class="seccion contenido-pagina">
+
+      <div class="contacto-contenedor">
+
+        <!-- CANALES INSTITUCIONALES -->
+        <div class="contacto-informacion">
+
+          <h2>Cómo comunicarte con nosotros</h2>
+
+          <p>
+            Estos son los medios oficiales del Colegio Santa Isabel
+            de Hungría.
+          </p>
+
+          <ul class="canales">
+            <li>
+              <strong>Dirección</strong>
+              <span>Capital Leguizamón 857, Salta, Argentina</span>
+              <a
+                href="https://www.google.com/maps/search/?api=1&amp;query=Capital+Leguiz%C3%B3n+857+Salta+Argentina"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Ver en el mapa ↗</a>
+            </li>
+
+            <li>
+              <strong>Teléfonos</strong>
+              <div class="canales-enlaces">
+                <a href="tel:+543874212110">387 421-2110</a>
+                <a href="tel:+543875022838">387 502-2838</a>
+              </div>
+            </li>
+
+            <li>
+              <strong>Correo electrónico</strong>
+              <a href="mailto:colsantaisabeldehungria@gmail.com">colsantaisabeldehungria@gmail.com</a>
+            </li>
+
+            <li>
+              <strong>Horarios de atención</strong>
+              <table class="horarios">
+                <caption class="solo-lectores">Horarios de atención</caption>
+                <tbody>
+                  <tr><th scope="row">Lunes a miércoles</th><td>7:30 a 12:30 h</td></tr>
+                  <tr><th scope="row">Jueves</th><td>7:30 a 16:00 h</td></tr>
+                  <tr><th scope="row">Viernes</th><td>7:00 a 12:00 h</td></tr>
+                  <tr><th scope="row">Sábado y domingo</th><td class="cerrado">Cerrado</td></tr>
+                </tbody>
+              </table>
+            </li>
+
+            <li>
+              <strong>Asistente virtual</strong>
+              <span>
+                Respuestas inmediatas sobre inscripciones, niveles y
+                horarios. Usá el botón “¿Necesitás ayuda?” en la esquina
+                de la pantalla.
+              </span>
+            </li>
+          </ul>
+
+        </div>
+
+        <!-- FORMULARIO DE CONSULTA -->
+        <form class="formulario" id="form-contacto">
+
+          <h2>Envianos tu consulta</h2>
+
+          <p>
+            Completá los campos y te responderemos a tu correo.
+          </p>
+
+          <label for="nombre">Nombre completo</label>
+
+          <input
+            id="nombre"
+            name="nombre"
+            type="text"
+            autocomplete="name"
+            maxlength="120"
+            placeholder="Escribí tu nombre"
+            required
+          >
+
+          <label for="correo">Correo electrónico</label>
+
+          <input
+            id="correo"
+            name="correo"
+            type="email"
+            autocomplete="email"
+            maxlength="160"
+            placeholder="ejemplo@correo.com"
+            required
+          >
+
+          <label for="mensaje">Mensaje</label>
+
+          <textarea
+            id="mensaje"
+            name="mensaje"
+            rows="5"
+            maxlength="2000"
+            placeholder="Escribí tu consulta..."
+            required
+          ></textarea>
+
+          <!-- Campo trampa: las personas no lo ven ni lo completan -->
+          <div class="campo-extra" aria-hidden="true">
+            <label for="sitio-extra">No completar este campo</label>
+            <input
+              id="sitio-extra"
+              name="sitio_extra"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+            >
+          </div>
+
+          <button class="boton" type="submit" id="boton-enviar">
+            Enviar consulta
+          </button>
+
+          <p
+            id="respuesta-formulario"
+            class="respuesta-formulario"
+            role="status"
+            aria-live="polite"
+          ></p>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="pie">
+
+    <div class="pie-contenido">
+
+      <a class="marca marca-pie" href="index.html">
+
+        <img
+          class="escudo"
+          src="logo.png"
+          alt="Escudo del Colegio Santa Isabel de Hungría"
+        >
+
+        <span class="marca-texto">
+          <strong>Santa Isabel de Hungría</strong>
+          <small>Sitio web institucional</small>
+        </span>
+
+      </a>
+
+      <div>
+        <h3>Explorar</h3>
+
+        <nav class="pie-enlaces" aria-label="Enlaces del sitio">
+          <a href="index.html">Inicio</a>
+          <a href="institucion.html">La institución</a>
+          <a href="niveles.html">Niveles</a>
+          <a href="noticias.html">Novedades</a>
+          <a href="contacto.html">Contacto</a>
+        </nav>
+      </div>
+
+      <div>
+        <h3>Sitio oficial</h3>
+        <nav class="pie-enlaces" aria-label="Sitio oficial">
+          <a href="https://colegiosantaisabeldehungria.com" target="_blank" rel="noopener noreferrer">Sitio web ↗</a>
+        </nav>
+      </div>
+
+    </div>
+
+    <div class="pie-final">
+
+      <p>
+        © <span id="anio"></span> Colegio Santa Isabel de Hungría.
+        Todos los derechos reservados.
+      </p>
+
+      <a href="#contenido">Volver arriba ↑</a>
+
+    </div>
+
+  </footer>
+
+  <script>
+    /* Año del pie */
+    const anio = document.getElementById("anio");
+
+    if (anio) {
+      anio.textContent = new Date().getFullYear();
+    }
+
+    /* ---------- Formulario de consulta ----------
+
+       Para que el formulario envíe mensajes de verdad, pegá acá la
+       dirección que te dé un servicio de formularios (por ejemplo
+       Formspree o Formsubmit) y el botón se habilita solo.
+       Mientras esté vacío, el botón queda desactivado y se muestra
+       un aviso para quien visite la página. */
+    const ENDPOINT_FORMULARIO = "";
+
+    const formulario = document.getElementById("form-contacto");
+    const respuesta = document.getElementById("respuesta-formulario");
+    const boton = document.getElementById("boton-enviar");
+    const nota = document.getElementById("nota-envio");
+
+    function mostrar(estado, texto) {
+      respuesta.dataset.estado = estado;
+      respuesta.textContent = texto;
+    }
+
+    if (formulario && respuesta && boton) {
+
+      if (!ENDPOINT_FORMULARIO) {
+        boton.disabled = true;
+        if (nota) nota.hidden = false;
+      }
+
+      formulario.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        if (!ENDPOINT_FORMULARIO) return;
+
+        /* Si el campo trampa tiene texto, es un robot: se ignora */
+        if (formulario.elements["sitio_extra"].value) return;
+
+        const textoBoton = boton.textContent;
+        boton.disabled = true;
+        boton.textContent = "Enviando…";
+        mostrar("", "");
+
+        try {
+          const resp = await fetch(ENDPOINT_FORMULARIO, {
+            method: "POST",
+            headers: { Accept: "application/json" },
+            body: new FormData(formulario)
+          });
+
+          if (!resp.ok) throw new Error("Respuesta " + resp.status);
+
+          formulario.reset();
+          mostrar(
+            "ok",
+            "¡Gracias! Recibimos tu consulta y te responderemos a tu correo."
+          );
+        } catch (error) {
+          /* No se borra lo que la persona escribió */
+          mostrar(
+            "error",
+            "No pudimos enviar tu consulta. Revisá tu conexión e intentá de nuevo en unos minutos."
+          );
+        } finally {
+          boton.disabled = false;
+          boton.textContent = textoBoton;
+        }
+      });
+    }
+  </script>
+
+  <!-- BOTÓN Y VENTANA DEL CHATBOT -->
+  <button class="chatbot-toggle" type="button"
+    aria-label="Abrir asistente virtual"
+    aria-expanded="false" aria-controls="chatbot-panel">
+    <span aria-hidden="true">✦</span>
+    <span class="chatbot-texto">¿Necesitás ayuda?</span>
+  </button>
+
+  <section class="chatbot-panel" id="chatbot-panel"
+    aria-label="Asistente virtual" hidden>
+    <div class="chatbot-cabecera">
+      <div>
+        <strong>Asistente del colegio</strong>
+        <small>Consultas frecuentes</small>
+      </div>
+      <button class="chatbot-cerrar" type="button"
+        aria-label="Cerrar asistente">×</button>
+    </div>
+
+    <div class="chatbot-mensajes" aria-live="polite">
+      <p class="mensaje mensaje-bot">
+        ¡Hola! 👋 Soy el asistente virtual del colegio.
+        ¿Sobre qué te gustaría consultar?
+      </p>
+    </div>
+
+    <div class="chatbot-opciones">
+      <button type="button" data-pregunta="inscripciones">
+        Inscripciones
+      </button>
+      <button type="button" data-pregunta="niveles">
+        Niveles educativos
+      </button>
+      <button type="button" data-pregunta="horarios">
+        Horarios
+      </button>
+      <button type="button" data-pregunta="contacto">
+        Contacto
+      </button>
+    </div>
+
+    <form class="chatbot-form">
+      <label class="solo-lectores" for="chatbot-input">
+        Escribí tu consulta
+      </label>
+      <input id="chatbot-input" name="consulta"
+        type="text" maxlength="300"
+        placeholder="Escribí tu consulta..."
+        autocomplete="off" required>
+      <button type="submit" aria-label="Enviar consulta">➤</button>
+    </form>
+    <p class="chatbot-aviso">Asistente automático de consultas frecuentes.</p>
+  </section>
+
+
+  <button class="volver-arriba" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+</body>
+</html>

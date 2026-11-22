@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#741f35">
+  <meta name="description" content="Sitio oficial del Colegio Santa Isabel de Hungría. Conocé nuestra institución, niveles educativos, novedades y formas de contacto.">
+  <title>Inicio | Colegio Santa Isabel de Hungría</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="configuracion.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="asistente.js"defer></script>
+</head>
+<body>
+
+  <!-- ENCABEZADO -->
+  <a class="salto" href="#contenido">Saltar al contenido</a>
+
+  <header class="encabezado">
+    <a class="marca" href="index.html" aria-label="Ir al inicio">
+      <img class="escudo" src="logo.png" alt="Escudo del Colegio Santa Isabel de Hungría">
+      <span class="marca-texto">
+        <strong>Colegio Santa Isabel de Hungría</strong>
+        <small>Educación y formación integral</small>
+      </span>
+    </a>
+
+    <button class="menu-toggle" type="button"
+      aria-label="Abrir menú" aria-expanded="false"
+      aria-controls="menu-principal">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="menu" id="menu-principal" aria-label="Navegación principal">
+      <a class="activo" aria-current="page" href="index.html">Inicio</a>
+      <a href="institucion.html">La institución</a>
+      <a href="niveles.html">Niveles</a>
+      <a href="noticias.html">Novedades</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    <!-- PORTADA CON VIDEO -->
+    <section class="portada">
+      <video class="video-fondo"
+        autoplay muted loop playsinline preload="metadata"
+        poster="portada.jpg"
+        aria-hidden="true">
+        <source src="video-colegio.mp4" type="video/mp4">
+      </video>
+
+      <div class="portada-capa"></div>
+
+      <div class="portada-contenido revelar">
+        <span class="etiqueta">COLEGIO SANTA ISABEL DE HUNGRÍA</span>
+        <h1>Un lugar para aprender, crecer y construir el futuro</h1>
+        <p>
+          Te damos la bienvenida a nuestro espacio institucional.
+          Descubrí nuestra propuesta educativa y nuestra comunidad.
+        </p>
+
+        <div class="botones-portada">
+          <a class="boton boton-dorado" href="#apartados">
+            Explorar secciones <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- BIENVENIDA -->
+    <section class="seccion bienvenida revelar" id="bienvenida">
+      <div class="seccion-titulo">
+        <span class="etiqueta etiqueta-oscura">NUESTRA COMUNIDAD</span>
+        <h2>Bienvenidos a nuestro colegio</h2>
+        <p>
+          Un espacio para acompañar el aprendizaje, fortalecer los valores
+          y promover el desarrollo integral de cada estudiante.
+        </p>
+      </div>
+    </section>
+
+    <!-- ACCESOS A LOS APARTADOS -->
+    <section class="seccion seccion-tarjetas" id="apartados">
+      <div class="seccion-titulo revelar">
+        <span class="etiqueta etiqueta-oscura">EXPLORÁ</span>
+        <h2>Conocé nuestra institución</h2>
+        <p>Encontrá la información que necesitás en nuestros apartados.</p>
+      </div>
+
+      <div class="tarjetas">
+        <a class="tarjeta revelar" href="institucion.html">
+          <div class="tarjeta-icono" aria-hidden="true">01</div>
+          <h3>La institución</h3>
+          <p>Conocé nuestra historia, identidad y comunidad educativa.</p>
+          <span class="tarjeta-enlace">Conocer más →</span>
+        </a>
+
+        <a class="tarjeta revelar" href="niveles.html">
+          <div class="tarjeta-icono" aria-hidden="true">02</div>
+          <h3>Niveles educativos</h3>
+          <p>Descubrí nuestra propuesta y los niveles que ofrecemos.</p>
+          <span class="tarjeta-enlace">Ver niveles →</span>
+        </a>
+
+        <a class="tarjeta revelar" href="noticias.html">
+          <div class="tarjeta-icono" aria-hidden="true">03</div>
+          <h3>Novedades</h3>
+          <p>Consultá noticias, actividades y acontecimientos escolares.</p>
+          <span class="tarjeta-enlace">Ver novedades →</span>
+        </a>
+
+        <a class="tarjeta revelar" href="contacto.html">
+          <div class="tarjeta-icono" aria-hidden="true">04</div>
+          <h3>Contacto</h3>
+          <p>Encontrá los medios para comunicarte con el colegio.</p>
+          <span class="tarjeta-enlace">Contactarnos →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <section class="seccion">
+      <div class="seccion-titulo revelar">
+        <span class="etiqueta etiqueta-oscura">NUESTRO DÍA A DÍA</span>
+        <h2>Momentos de nuestra comunidad</h2>
+        <p>Un espacio para compartir imágenes de la vida escolar.</p>
+      </div>
+
+      <div class="galeria">
+        <button class="foto-galeria revelar" type="button"
+          data-imagen="colegio.jpeg"
+          data-descripcion="Nuestro colegio"
+          aria-label="Ampliar fotografía del colegio">
+          <img src="colegio.jpeg" alt="Instalaciones del colegio"
+            loading="lazy">
+          <span>Nuestro colegio ↗</span>
+        </button>
+
+        <button class="foto-galeria revelar" type="button"
+          data-imagen="images.jpeg"
+          data-descripcion="Nuestra comunidad educativa"
+          aria-label="Ampliar fotografía de la comunidad educativa">
+          <img src="images.jpeg" alt="Comunidad educativa"
+            loading="lazy">
+          <span>Nuestra comunidad ↗</span>
+        </button>
+
+
+      </div>
+    </section>
+  </main>
+
+  <!-- PIE INSTITUCIONAL -->
+  <footer class="pie">
+    <div class="pie-contenido">
+      <a class="marca marca-pie" href="index.html">
+        <img class="escudo" src="logo.png"
+          alt="Escudo del Colegio Santa Isabel de Hungría" loading="lazy">
+        <span class="marca-texto">
+          <strong>Colegio Santa Isabel de Hungría</strong>
+          <small>Educación y formación integral</small>
+        </span>
+      </a>
+
+      <div class="pie-enlaces">
+        <h3>Explorá</h3>
+        <a href="institucion.html">La institución</a>
+        <a href="niveles.html">Niveles educativos</a>
+        <a href="noticias.html">Novedades</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+
+      <div class="pie-redes">
+        <h3>Redes y sitio oficial</h3>
+        <a href="https://www.facebook.com/people/Colegio-Santa-Isabel-De-Hungria-Oficial/100088083434587/" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
+        <a href="https://colegiosantaisabeldehungria.com" target="_blank" rel="noopener noreferrer">Sitio web ↗</a>
+      </div>
+    </div>
+
+    <div class="pie-final">
+      <p>© <span class="anio-actual"></span> Colegio Santa Isabel de Hungría.</p>
+      <p>Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <button class="volver-arriba" type="button"
+    aria-label="Volver al inicio" title="Volver arriba">↑</button>
+
+  <!-- BOTÓN Y VENTANA DEL CHATBOT -->
+  <button class="chatbot-toggle" type="button"
+    aria-label="Abrir asistente virtual"
+    aria-expanded="false" aria-controls="chatbot-panel">
+    <span aria-hidden="true">✦</span>
+    <span class="chatbot-texto">¿Necesitás ayuda?</span>
+  </button>
+
+  <section class="chatbot-panel" id="chatbot-panel"
+    aria-label="Asistente virtual" hidden>
+    <div class="chatbot-cabecera">
+      <div>
+        <strong>Asistente del colegio</strong>
+        <small>Consultas frecuentes</small>
+      </div>
+      <button class="chatbot-cerrar" type="button"
+        aria-label="Cerrar asistente">×</button>
+    </div>
+
+    <div class="chatbot-mensajes" aria-live="polite">
+      <p class="mensaje mensaje-bot">
+        ¡Hola! 👋 Soy el asistente virtual del colegio.
+        ¿Sobre qué te gustaría consultar?
+      </p>
+    </div>
+
+    <div class="chatbot-opciones">
+      <button type="button" data-pregunta="inscripciones">
+        Inscripciones
+      </button>
+      <button type="button" data-pregunta="niveles">
+        Niveles educativos
+      </button>
+      <button type="button" data-pregunta="horarios">
+        Horarios
+      </button>
+      <button type="button" data-pregunta="contacto">
+        Contacto
+      </button>
+    </div>
+
+    <form class="chatbot-form">
+      <label class="solo-lectores" for="chatbot-input">
+        Escribí tu consulta
+      </label>
+      <input id="chatbot-input" name="consulta"
+        type="text" maxlength="300"
+        placeholder="Escribí tu consulta..."
+        autocomplete="off" required>
+      <button type="submit" aria-label="Enviar consulta">➤</button>
+    </form>
+    <p class="chatbot-aviso">Asistente automático de consultas frecuentes.</p>
+  </section>
+
+  <!-- GALERÍA AMPLIABLE -->
+  <dialog class="visor-imagen" aria-label="Fotografía ampliada">
+    <button class="visor-cerrar" type="button"
+      aria-label="Cerrar fotografía">×</button>
+    <img src="" alt="">
+    <p></p>
+  </dialog>
+
+  <!-- WhatsApp se activa desde configuracion.js cuando se cargue el número institucional. -->
+
+</body>
+</html>
